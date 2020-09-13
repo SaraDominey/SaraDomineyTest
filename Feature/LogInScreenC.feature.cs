@@ -70,12 +70,12 @@ namespace Sara.Feature
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void ValidUserLogsInSuccessfully(string username, string[] exampleTags)
+        public virtual void ValidUserLogsInSuccessfullyToTheProductPage(string username, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("username", username);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("valid user logs in successfully", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("valid user logs in successfully to the product page", null, tagsOfScenario, argumentsOfScenario);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -97,57 +97,108 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 4
- testRunner.Given(string.Format("a valid user logs in to SwagLabs with \"{0}\" \"secret_sauce\"", username), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("browser is launched", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 5
- testRunner.When("the Login button is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And(string.Format("a valid user logs in to SwagLabs with \"{0}\" \"secret_sauce\"", username), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 6
+ testRunner.When("the Login button is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 7
  testRunner.Then("the product page is launched", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 8
+ testRunner.And("close browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("valid user logs in successfully, standard_user", SourceLine=8)]
-        public virtual void ValidUserLogsInSuccessfully_Standard_User()
+        [TechTalk.SpecRun.ScenarioAttribute("valid user logs in successfully to the product page, standard_user", SourceLine=11)]
+        public virtual void ValidUserLogsInSuccessfullyToTheProductPage_Standard_User()
         {
 #line 3
-this.ValidUserLogsInSuccessfully("standard_user", ((string[])(null)));
+this.ValidUserLogsInSuccessfullyToTheProductPage("standard_user", ((string[])(null)));
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("valid user logs in successfully, locked_out_user", SourceLine=8)]
-        public virtual void ValidUserLogsInSuccessfully_Locked_Out_User()
+        [TechTalk.SpecRun.ScenarioAttribute("valid user logs in successfully to the product page, problem_user", SourceLine=11)]
+        public virtual void ValidUserLogsInSuccessfullyToTheProductPage_Problem_User()
         {
 #line 3
-this.ValidUserLogsInSuccessfully("locked_out_user", ((string[])(null)));
+this.ValidUserLogsInSuccessfullyToTheProductPage("problem_user", ((string[])(null)));
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("valid user logs in successfully, problem_user", SourceLine=8)]
-        public virtual void ValidUserLogsInSuccessfully_Problem_User()
+        [TechTalk.SpecRun.ScenarioAttribute("valid user logs in successfully to the product page, performance_glitch_user", SourceLine=11)]
+        public virtual void ValidUserLogsInSuccessfullyToTheProductPage_Performance_Glitch_User()
         {
 #line 3
-this.ValidUserLogsInSuccessfully("problem_user", ((string[])(null)));
+this.ValidUserLogsInSuccessfullyToTheProductPage("performance_glitch_user", ((string[])(null)));
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("valid user logs in successfully, performance_glitch_user", SourceLine=8)]
-        public virtual void ValidUserLogsInSuccessfully_Performance_Glitch_User()
+        [TechTalk.SpecRun.ScenarioAttribute("confirm can add an item to the basket and the item is present on the carts conten" +
+            "t page", SourceLine=16)]
+        public virtual void ConfirmCanAddAnItemToTheBasketAndTheItemIsPresentOnTheCartsContentPage()
         {
-#line 3
-this.ValidUserLogsInSuccessfully("performance_glitch_user", ((string[])(null)));
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("confirm can add an item to the basket and the item is present on the carts conten" +
+                    "t page", null, tagsOfScenario, argumentsOfScenario);
+#line 17
+this.ScenarioInitialize(scenarioInfo);
 #line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 18
+ testRunner.Given("browser is launched", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 19
+ testRunner.And("a valid user logs in to SwagLabs with \"standard_user\" \"secret_sauce\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 20
+ testRunner.When("the Login button is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 21
+ testRunner.Then("the product page is launched", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 22
+ testRunner.And("add to cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 23
+ testRunner.And("view basket content", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 24
+ testRunner.And("close browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("invalid username returns an error", SourceLine=14)]
+        [TechTalk.SpecRun.ScenarioAttribute("invalid username returns an error", SourceLine=25)]
         public virtual void InvalidUsernameReturnsAnError()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("invalid username returns an error", null, tagsOfScenario, argumentsOfScenario);
-#line 15
+#line 26
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -167,27 +218,33 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 16
- testRunner.Given("an unknown user logs in to SwagLabs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 27
+ testRunner.Given("browser is launched", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 17
+#line 28
+ testRunner.And("an unknown user logs in to SwagLabs", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 29
  testRunner.When("the Login button is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 18
- testRunner.Then("a message returned not indicating valid user with incorrect password or invalid u" +
-                        "sername", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 30
+ testRunner.Then("confirm displayed error message does not indicate a valid user with incorrect pas" +
+                        "sword or invalid username", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 31
+ testRunner.And("close browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("correct username and invalid password returns an error", SourceLine=19)]
-        public virtual void CorrectUsernameAndInvalidPasswordReturnsAnError()
+        [TechTalk.SpecRun.ScenarioAttribute("correct username and incorrect password returns an error", SourceLine=32)]
+        public virtual void CorrectUsernameAndIncorrectPasswordReturnsAnError()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("correct username and invalid password returns an error", null, tagsOfScenario, argumentsOfScenario);
-#line 20
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("correct username and incorrect password returns an error", null, tagsOfScenario, argumentsOfScenario);
+#line 33
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -207,14 +264,21 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 21
- testRunner.Given("a valid user logs in to SwagLabs with \"standard_user\" \"invalid_password\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 34
+ testRunner.Given("browser is launched", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 22
+#line 35
+ testRunner.And("a valid user logs in to SwagLabs with \"standard_user\" \"invalid password\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 36
  testRunner.When("the Login button is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 23
- testRunner.Then("a message returned not indicating valid user with incorrect password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 37
+ testRunner.Then("confirm displayed error message does not indicate a valid user with incorrect pas" +
+                        "sword or invalid username", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 38
+ testRunner.And("close browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

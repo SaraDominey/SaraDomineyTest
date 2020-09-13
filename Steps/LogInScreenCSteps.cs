@@ -3,8 +3,9 @@ using TechTalk.SpecFlow;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Internal;
-//using Shouldly;
+using Shouldly;
+using System.Threading;
+
 
 namespace Sara.Feature
 
@@ -13,17 +14,20 @@ namespace Sara.Feature
     public class LaunchWebsite
     {
         IWebDriver driver;
+        private string expected;
 
         [SetUp]
-        public void startBrowser()
+        public void DriverLocation()
         {
             driver = new ChromeDriver("C://Users//domin//Desktop//Chrome");
 
         }
 
-        [Test]
-        public void Test()
+
+        [Given(@"browser is launched")]
+        public void GivenBrowserisLaunched()
         {
+            driver = new ChromeDriver("C://Users//domin//Desktop//Chrome");
             driver.Url = "https://saucedemo.com";
 
             driver.FindElement(By.Id("details-button"));
@@ -33,21 +37,18 @@ namespace Sara.Feature
             lnk2.Click();
 
         }
-        [TearDown]
-           public void closeBrowser()
-           {
-               driver.Close();
-           }
-             
+
 
         [Given(@"a valid user logs in to SwagLabs with ""(.*)"" ""(.*)""")]
-        public void GivenAValidUserLogsInToSwagLabsWith(string p0, string p1)
+        public void GivenAValidUserLogsInToSwagLabsWith(string username, string password1)
         {
             IWebElement userName = driver.FindElement(By.Id("user-name"));
-            userName.SendKeys("standard_user");
+            userName.SendKeys(username);
             IWebElement password = driver.FindElement(By.Id("password"));
-            password.SendKeys("secret_sauce");
+            password.SendKeys(password1);
+
         }
+
 
         [Given(@"an unknown user logs in to SwagLabs")]
         public void GivenAnUnknownUserLogsInToSwagLabs()
@@ -57,6 +58,8 @@ namespace Sara.Feature
             IWebElement password = driver.FindElement(By.Id("password"));
             password.SendKeys("password");
         }
+
+
         [When(@"the Login button is selected")]
         public void WhenTheLoginButtonIsSelected()
         {
@@ -65,26 +68,96 @@ namespace Sara.Feature
             lnk.Click();
         }
 
+
         [Then(@"the product page is launched")]
         public void ThenTheProductPageIsLaunched()
         {
             driver.FindElement(By.ClassName("product_label"));
-            Equals(true);
+            ShouldAssertException.Equals(By.ClassName("product_label"), "product_labels");
+
+            Thread.Sleep(1000);
         }
 
-        [Then(@"a message returned not indicating valid user with incorrect password or invalid username")]
-        public void ThenAMessageReturnedNotIndicatingValidUserWithIncorrectPasswordOrInvalidUsername()
+
+        [Then(@"add to cart")]
+        public void ThenAddToCart()
         {
-            // to be completed
-            //driver.FindElement(By.LinkText.ToString("product_label"));
-            //does not contain string text equalto ("valid user", "incorrect password" "invalid username")
+            driver.FindElement(By.CssSelector("button[class='btn_primary btn_inventory']"));
+            IWebElement cart = driver.FindElement(By.CssSelector("button[class='btn_primary btn_inventory']"));
+            cart.Click();
+
+            Thread.Sleep(1000);
+
         }
 
-        [Then(@"a message returned not indicating valid user with incorrect password")]
-        public void ThenAMessageReturnedNotIndicatingValidUserWithIncorrectPassword()
+
+        [Then(@"close browser")]
+        public void ThenCloseBrowser()
         {
-            // to be completed
+            driver.Close();
+        }
+
+
+        [Then(@"view basket content")]
+        public void ThenViewBasketContent()
+        {
+            //driver.FindElement(By.ClassName("product_label"));
+            IWebElement shopCart = driver.FindElement(By.Id("shopping_cart_container"));
+            shopCart.Click();
+
+            driver.FindElement(By.Id("shopping_cart_container"));
+            driver.FindElement(By.ClassName("cart_desc_label"));
+            var cartElement = driver.FindElement(By.ClassName("cart_desc_label"));
+            var itemExists = true;
+
+            if (string.IsNullOrEmpty(cartElement.Text))
+            {
+                Console.WriteLine("Expected an entry in the cart but none found");
+                itemExists = false;
+            };
+
+            Thread.Sleep(1000);
+            itemExists.ShouldBeTrue();
+
+        }
+
+
+        [Then(@"confirm displayed error message does not indicate a valid user with incorrect password or invalid username")]
+        public void ThenConfirmDisplayedErrorMessageDoesNotIndicatAValidUserWithIncorrectPasswordOrInvalidUsername()
+        {
+            driver.FindElement(By.ClassName("error-button"));
+            var text = driver.FindElement(By.ClassName("error-button")).Text.Contains("Username and password do not match any user in this service");
+            var incorrectErrorMessage = false;
+            
+            if (text)
+            {
+                var valid = "valid user";
+                Contains.Substring(valid);
+                Console.WriteLine("invalid error message being returned to end user");
+                incorrectErrorMessage = true;
+            }
+
+            else if (text)
+            {
+                var incorrect = "incorrect password";
+                Contains.Substring(incorrect);
+                Console.WriteLine("invalid error message being returned to end user");
+                incorrectErrorMessage = true;
+            }
+
+            else if (text)
+            {
+
+                var invalid = "invalid username";
+                Contains.Substring(invalid);
+                Console.WriteLine("invalid error message being returned to end user");
+                incorrectErrorMessage = true;
+            }
+
+            incorrectErrorMessage.ShouldBeFalse();
+
         }
     }
 }
+    
 
